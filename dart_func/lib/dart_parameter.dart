@@ -16,6 +16,13 @@ void nameParams() {
 
 // 2)위치적 선택 매개변수(Optional positional parameters) : []
 // required 안됨.
-void getAddr(String country, [String city = '서울특별시', String? gu]) {
+void getAdrs(String country, [String city = '서울특별시', String? gu]) {
   print('$country, $city, $gu');
+}
+
+void positonParam() {
+  getAdrs('대한민국', '대구광역시', '중구');
+  getAdrs('대한민국', '중구', '대구광역시');
+
+  getAdrs('대한민국');
 }
