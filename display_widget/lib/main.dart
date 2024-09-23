@@ -1,6 +1,6 @@
-import 'package:display_widget/widgets/01_data_display.dart';
 import 'package:flutter/material.dart';
 import './widgets/01_data_display.dart';
+import './widgets/02_textField.dart';
 
 void main() => runApp(MyApp());
 
@@ -54,6 +54,12 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.article,
                   size: 30, color: _curIndex == 1 ? Colors.blue : Colors.black),
               label: "datas",
+            ),
+            BottomNavigationBarItem(
+              // BottomNavigationBarItem : 메뉴설정
+              icon: Icon(Icons.mode_edit,
+                  size: 30, color: _curIndex == 2 ? Colors.blue : Colors.black),
+              label: "textField",
             )
           ],
         ));
@@ -68,6 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 1:
         page = dataDisplayPage();
+        break;
+      case 2:
+        page = textInputPage(context);
         break;
     }
     return page;
