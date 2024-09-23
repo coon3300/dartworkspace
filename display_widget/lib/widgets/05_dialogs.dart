@@ -112,11 +112,9 @@ class DialogDemo extends StatefulWidget {
       case 'Alert':
         _selelctedClass = _alertDialogState();
         break;
-      /*
       case 'Show':
         _selelctedClass = _showDialogState();
         break;
-        */
     }
   }
 
@@ -129,7 +127,10 @@ class _simpleDialogState extends State<DialogDemo> {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: SimpleDialog(),
+      child: SimpleDialog(
+        title: Text('SimpleDialog Title'),
+        children: [Text('This is SimpleDialog.')],
+      ),
     );
   }
 }
@@ -139,28 +140,55 @@ class _alertDialogState extends State<DialogDemo> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AlertDialog(),
+      child: AlertDialog(
+        title: Text('AlertDialog Title'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              Text('This is AlertDialog.'),
+            ],
+          ),
+        ), // children이 아닌 content
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Navigator.of(context).pop();
+              Navigator.pop(context);
+            },
+            child: Text('OK'),
+          )
+        ],
+      ),
     );
   }
 }
-/*
+
 // 3. showdialog
-class _showDialogState extends State<DialogDemo>{ 
+class _showDialogState extends State<DialogDemo> {
   @override
   Widget build(BuildContext context) {
     return Center(
-          child: TextButton(
-            onPressed: ()=> _dialogBuilder(context), 
-            child: const Text('show')
-          )
-    );
+        child: TextButton(
+            onPressed: () => _dialogBuilder(context),
+            child: const Text('show')));
   }
 }
 
-
 Future<void> _dialogBuilder(BuildContext context) {
-
-  return showDialog();
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Info'),
+        content: Text('AlertDialog with showDialog'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('OK'))
+        ],
+      );
+    },
+  );
 }
-
-*/

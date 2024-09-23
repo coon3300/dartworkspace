@@ -71,7 +71,7 @@ class _CheckPage extends State<CheckPage> {
                 icon: Icon(
                   Icons.adjust,
                   size: 30,
-                  color: _curIndex == 3 ? Colors.blue : Colors.black54,
+                  color: _curIndex == 4 ? Colors.blue : Colors.black54,
                 ),
                 label: "radioListTotle"),
           ]),
@@ -119,7 +119,6 @@ class CheckDemo extends StatefulWidget {
       case 'Checkbox':
         _inputClass = _checkboxState();
         break;
-      /*
       case 'Switch':
         _inputClass = _switchState();
         break;
@@ -129,7 +128,6 @@ class CheckDemo extends StatefulWidget {
       case 'RadoiListTitle':
         _inputClass = _radioListTitleState();
         break;
-        */
     }
   }
 
@@ -167,17 +165,33 @@ class _checkboxState extends State<CheckDemo> {
   }
 }
 
-/*
-
 // 2. Switch
 class _switchState extends State<CheckDemo> {
   var _isChecked = false;
+  var _isOk = false;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Switch(),
-    );
+    return Column(children: [
+      // Center -> Column
+      Switch(
+        value: _isChecked,
+        onChanged: (value) {
+          setState(() {
+            _isChecked = value; // value! 아닌 이유 모르겟음. checkbox와 다름.
+          });
+        },
+      ),
+      SwitchListTile(
+        title: Text('동의합니다!'),
+        value: _isOk,
+        onChanged: (value) {
+          setState(() {
+            _isOk = value; // value! 아닌 이유 모르겟음. checkbox와 다름.
+          });
+        },
+      )
+    ]);
   }
 }
 
@@ -195,11 +209,27 @@ class _radioState extends State<CheckDemo> {
         children: <Widget>[
           ListTile(
             title: const Text('사과'),
-            leading: Radio(),
+            leading: Radio(
+              value: Fruit.APPLE, // 해당 Radio를 선택한 경우 가지는 값
+              groupValue: _fruit, // 서로 다른 Radio를 한 그룹으로 설정
+              onChanged: (value) {
+                setState(() {
+                  _fruit = value!;
+                });
+              },
+            ),
           ),
           ListTile(
             title: const Text('바나나'),
-            leading: Radio(),
+            leading: Radio(
+              value: Fruit.BANANA, // 해당 Radio를 선택한 경우 가지는 값
+              groupValue: _fruit, // 서로 다른 Radio를 한 그룹으로 설정
+              onChanged: (value) {
+                setState(() {
+                  _fruit = value!;
+                });
+              },
+            ),
           ),
         ],
       ),
@@ -217,12 +247,30 @@ class _radioListTitleState extends State<CheckDemo> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          RadioListTile(),
-          RadioListTile(),
+          RadioListTile(
+            title: Text('사과'),
+            subtitle: Text('능금'),
+            value: Fruit.APPLE, // 해당 Radio를 선택한 경우 가지는 값
+            groupValue: _fruit, // 서로 다른 Radio를 한 그룹으로 설정
+            onChanged: (value) {
+              setState(() {
+                _fruit = value!;
+              });
+            },
+          ),
+          RadioListTile(
+            title: Text('바나나'),
+            subtitle: Text('황금'),
+            value: Fruit.BANANA, // 해당 Radio를 선택한 경우 가지는 값
+            groupValue: _fruit, // 서로 다른 Radio를 한 그룹으로 설정
+            onChanged: (value) {
+              setState(() {
+                _fruit = value!;
+              });
+            },
+          ),
         ],
       ),
     );
   }
 }
-
-*/
