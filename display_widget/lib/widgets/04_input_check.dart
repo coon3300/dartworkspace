@@ -71,11 +71,7 @@ class _CheckPage extends State<CheckPage> {
                 icon: Icon(
                   Icons.adjust,
                   size: 30,
-<<<<<<< HEAD
                   color: _curIndex == 4 ? Colors.blue : Colors.black54,
-=======
-                  color: _curIndex == 3 ? Colors.blue : Colors.black54,
->>>>>>> fff67a2e118019148e77fcc967a85f7ce3b39482
                 ),
                 label: "radioListTotle"),
           ]),
@@ -123,10 +119,6 @@ class CheckDemo extends StatefulWidget {
       case 'Checkbox':
         _inputClass = _checkboxState();
         break;
-<<<<<<< HEAD
-=======
-      /*
->>>>>>> fff67a2e118019148e77fcc967a85f7ce3b39482
       case 'Switch':
         _inputClass = _switchState();
         break;
@@ -136,10 +128,6 @@ class CheckDemo extends StatefulWidget {
       case 'RadoiListTitle':
         _inputClass = _radioListTitleState();
         break;
-<<<<<<< HEAD
-=======
-        */
->>>>>>> fff67a2e118019148e77fcc967a85f7ce3b39482
     }
   }
 
@@ -177,7 +165,6 @@ class _checkboxState extends State<CheckDemo> {
   }
 }
 
-<<<<<<< HEAD
 // 2. Switch
 class _switchState extends State<CheckDemo> {
   var _isChecked = false;
@@ -205,19 +192,6 @@ class _switchState extends State<CheckDemo> {
         },
       )
     ]);
-=======
-/*
-
-// 2. Switch
-class _switchState extends State<CheckDemo> {
-  var _isChecked = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Switch(),
-    );
->>>>>>> fff67a2e118019148e77fcc967a85f7ce3b39482
   }
 }
 
@@ -235,7 +209,6 @@ class _radioState extends State<CheckDemo> {
         children: <Widget>[
           ListTile(
             title: const Text('사과'),
-<<<<<<< HEAD
             leading: Radio(
               value: Fruit.APPLE, // 해당 Radio를 선택한 경우 가지는 값
               groupValue: _fruit, // 서로 다른 Radio를 한 그룹으로 설정
@@ -257,13 +230,6 @@ class _radioState extends State<CheckDemo> {
                 });
               },
             ),
-=======
-            leading: Radio(),
-          ),
-          ListTile(
-            title: const Text('바나나'),
-            leading: Radio(),
->>>>>>> fff67a2e118019148e77fcc967a85f7ce3b39482
           ),
         ],
       ),
@@ -281,7 +247,6 @@ class _radioListTitleState extends State<CheckDemo> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-<<<<<<< HEAD
           RadioListTile(
             title: Text('사과'),
             subtitle: Text('능금'),
@@ -304,17 +269,8 @@ class _radioListTitleState extends State<CheckDemo> {
               });
             },
           ),
-=======
-          RadioListTile(),
-          RadioListTile(),
->>>>>>> fff67a2e118019148e77fcc967a85f7ce3b39482
         ],
       ),
     );
   }
 }
-<<<<<<< HEAD
-=======
-
-*/
->>>>>>> fff67a2e118019148e77fcc967a85f7ce3b39482
