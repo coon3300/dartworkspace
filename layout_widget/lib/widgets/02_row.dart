@@ -28,7 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(title: const Text('App Name')),
         body: const Row(
           mainAxisSize: MainAxisSize.max, // 차지하는 영역
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, // 정렬
+          mainAxisAlignment:
+              MainAxisAlignment.spaceBetween, // 정렬 row, colmun에 따라 기준 축이 다름
           crossAxisAlignment: CrossAxisAlignment.center, // 정렬
           children: <Widget>[
             Text('1', style: TextStyle(fontSize: 30.0)),
