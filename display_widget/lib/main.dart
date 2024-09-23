@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './widgets/01_data_display.dart';
 import './widgets/02_textField.dart';
+import './widgets/03_01_buttons.dart';
+import './widgets/03_02_buttons.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
           // 테마 : 전체적으로 통일해서 속성 넣을 부분(전반적인 색 지정)
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
           useMaterial3: true),
-      home: MyHomePage(), // 무엇을 출력할건지
+      // home: MyHomePage(), // 무엇을 출력할건지?
+      home: ButtonPage(), // 무엇을 출력할건지?
     );
   }
 }
@@ -60,6 +63,12 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.mode_edit,
                   size: 30, color: _curIndex == 2 ? Colors.blue : Colors.black),
               label: "textField",
+            ),
+            BottomNavigationBarItem(
+              // BottomNavigationBarItem : 메뉴설정
+              icon: Icon(Icons.list,
+                  size: 30, color: _curIndex == 3 ? Colors.blue : Colors.black),
+              label: "buttons",
             )
           ],
         ));
@@ -77,6 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 2:
         page = textInputPage(context);
+        break;
+      case 3:
+        page = buttonListOne();
         break;
     }
     return page;
