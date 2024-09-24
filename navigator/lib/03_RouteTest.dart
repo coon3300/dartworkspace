@@ -11,7 +11,7 @@ class WidgetDemo extends StatelessWidget {
         title: 'Flutter Demo App',
         // home: FirstPage(),
         initialRoute: '/firstPage',
-        // Navigator를 활용해서 전활한 화면 등록
+        // Navigator를 활용해서 전달할 화면 등록
         routes: {
           '/firstPage': (context) => FirstPage(),
           '/secondPage': (context) => SecondPage(data: '(request)'),
