@@ -46,6 +46,7 @@ class SecondPage extends StatelessWidget {
             child: ElevatedButton(
           onPressed: () {
             // 버튼을 클릭할 경우 새로운 위젯을 호출
+            Navigator.pop(context);
           },
           child: Text('Go to previous Page'),
         )));
