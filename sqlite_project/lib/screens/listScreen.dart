@@ -40,15 +40,24 @@ class _ListScreenState extends State<ListScreen> {
             leading: Text('${memo.no}'),
             title: Text('${memo.info}'),
             trailing: IconButton(
-              onPressed: () {
+              onPressed: () async {
                 // 삭제
+                int result = await widget.dbHelper.deleteMemo(memo.no as int);
+
+                if (result > 0) {
+                  setState(() {
+                    _memoList.removeWhere(
+                      (info) => info.no == memo.no,
+                    );
+                  });
+                }
               },
               icon: Icon(Icons.delete),
             ),
             onTap: () {
               Navigator.pushNamed(
                 context,
-                'memo/read',
+                '/memo/read',
                 arguments: memo.no,
               );
             },
