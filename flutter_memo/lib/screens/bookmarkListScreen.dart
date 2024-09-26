@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 import '../mappers/MemoDBHelper.dart';
+import '../mappers/BookmarkDBHelper.dart';
 import '../models/memo.dart';
+import '../models/bookmark.dart';
 
 class BookmarkListScreen extends StatefulWidget {
   final MemoDBHelper dbHelper = MemoDBHelper();
+  final BookmarkDBHelper dbBookmarkHelper = BookmarkDBHelper();
   @override
   State<StatefulWidget> createState() => _BookmarkListScreenState();
 }
@@ -18,7 +21,7 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
     // 초기화
     super.initState();
 
-    widget.dbHelper.getMemos().then((result) {
+    widget.dbBookmarkHelper.getBookmarks().then((result) {
       setState(() {
         _memoList = result;
       });

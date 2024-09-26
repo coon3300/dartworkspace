@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import '../models/bookmark.dart';
+import '../models/memo.dart';
 
 // Mapper
 class BookmarkDBHelper {
@@ -45,12 +46,12 @@ class BookmarkDBHelper {
   }
 
   // 전체 조회
-  Future<List<Bookmark>> getBookmarks() async {
+  Future<List<Memo>> getBookmarks() async {
     Database db = await database; //   Database? _database; 이 (?)부분과 뭔가 관련 있음.
     List<Map<String, dynamic>> result =
         // await db.query('bookmarks', orderBy: 'no');
         await db.rawQuery(
-            'SELECT * FROM memos WHERE no in (SELECT mno FROM bookmarks)');
+            'SELECT * FROM memos WHERE no In (SELECT mno FROM bookmarks)');
 
     // SELECT * FROM memos WHERE no in (SELECT mno FROM bookmark)
 
@@ -58,12 +59,12 @@ class BookmarkDBHelper {
     return List.generate(
       result.length,
       (index) {
-        Map<String, dynamic> bookmark = result[index];
+        Map<String, dynamic> memo = result[index];
         // return Bookmark.from({
         //   'no': bookmark['no'],
         //   'mno': bookmark['mno'],
         // });
-        return Bookmark.from(bookmark); // 위와 같은 기능.
+        return Memo.from(memo); // 위와 같은 기능.
       },
     ); // List<Bookmark>
   }
