@@ -1,43 +1,24 @@
-// screens/UpdateScreen.dart
+// screens/InsertScreen.dart
 
 import 'package:flutter/material.dart';
 import '../mappers/MemoDBHelper.dart';
 import '../models/memo.dart';
 
-class UpdateScreen extends StatefulWidget {
+class InsertScreen extends StatefulWidget {
   final MemoDBHelper dbHelper = MemoDBHelper();
   @override
-  State<StatefulWidget> createState() => _UpdateScreenState();
+  State<StatefulWidget> createState() => _InsertScreenState();
 }
 
-class _UpdateScreenState extends State<UpdateScreen> {
+class _InsertScreenState extends State<InsertScreen> {
   final TextEditingController _memoEditingController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  late int no;
-
-  // initState에서는 context사용할 수 없어서 didChangeDependencies 사용함.
-  // 둘다 build 전에 실행됨.
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Navigator로 넘겨받은 arguments를 담는 객체
-    final arguments = ModalRoute.of(context)!.settings.arguments;
-
-    if (arguments != null) {
-      no = arguments as int;
-
-      widget.dbHelper.getMemoInfo(no).then((resut) {
-        _memoEditingController.text = resut.info;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('메모 수정'),
+        title: Text('메모 등록'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -52,8 +33,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
               child: TextFormField(
                 controller: _memoEditingController,
                 decoration: InputDecoration(
-                  labelText: '정보',
-                  helperText: '기록하고자 하는 정보',
+                  labelText: '메모',
+                  helperText: 'memo',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
@@ -75,23 +56,21 @@ class _UpdateScreenState extends State<UpdateScreen> {
                     if (_formKey.currentState!.validate()) {
                       // 모든 항목에 정상적인 값 입력된 경우
                       String info = _memoEditingController.text;
-                      Memo memo = Memo(no: no, info: info);
-
-                      int result = await widget.dbHelper.updateMemo(memo);
+                      Memo memo = Memo(info: info);
+                      // widget.dbHelper.insertMemo(memo);
+                      int result = await widget.dbHelper.insertMemo(memo);
 
                       if (result > 0) {
                         Navigator.pushNamedAndRemoveUntil(
                           context,
-                          "/memo/read",
-                          // (route) => false, // 전체 삭제
-                          ModalRoute.withName('/memo/list'), // 지정된 위치까지
-                          arguments: memo.no,
+                          "/memo/list",
+                          (route) => false,
                         );
                         // push되는 라우터 아래의 경로를 모두 제거 => 사실상 재호출
                       }
                     }
                   },
-                  child: Text('수정'),
+                  child: Text('등록'),
                 ),
                 TextButton(
                   onPressed: () {
