@@ -110,13 +110,13 @@ class BookmarkDBHelper {
     */
   }
 
-  // 삭제
-  Future<int> deleteBookmark(int no) async {
-    Database db = await database;
-    return await db.delete(
-      'bookmarks',
-      where: 'no = ?',
-      whereArgs: [no],
-    );
-  }
+  // // 삭제
+  // Future<int> deleteBookmark(int no) async {
+  //   Database db = await database;
+  //   return await db.delete(
+  //     'bookmarks',
+  //     where: 'no = ?',
+  //     whereArgs: [no],
+  //   );
+  // }
 }

@@ -43,7 +43,9 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
             trailing: IconButton(
               onPressed: () async {
                 // 삭제
-                int result = await widget.dbHelper.deleteMemo(memo.no as int);
+                // int result = await widget.dbHelper.deleteMemo(memo.no as int);
+                int result =
+                    await widget.dbHelper.deleteBookmark(memo.no as int);
 
                 if (result > 0) {
                   setState(() {

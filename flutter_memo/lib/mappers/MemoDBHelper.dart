@@ -56,7 +56,7 @@ class MemoDBHelper {
   Future<List<Memo>> getBookmarks() async {
     Database db = await database; //   Database? _database; 이 (?)부분과 뭔가 관련 있음.
     List<Map<String, dynamic>> result = await db.rawQuery(
-        'SELECT * FROM memos WHERE no In (SELECT mno FROM bookmarks)');
+        'SELECT * FROM memos WHERE no IN (SELECT mno FROM bookmarks)');
     // SELECT * FROM memos ORDER BY no
     return List.generate(
       result.length,
@@ -140,6 +140,16 @@ class MemoDBHelper {
     return await db.delete(
       'memos',
       where: 'no = ?',
+      whereArgs: [no],
+    );
+  }
+
+  // 북마크 삭제
+  Future<int> deleteBookmark(int no) async {
+    Database db = await database;
+    return await db.delete(
+      'bookmarks',
+      where: 'mno = ?',
       whereArgs: [no],
     );
   }
