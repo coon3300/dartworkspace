@@ -53,7 +53,7 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
                   });
                 }
               },
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.delete_forever_outlined),
             ),
             onTap: () {
               Navigator.pushNamed(

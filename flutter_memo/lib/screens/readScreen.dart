@@ -70,15 +70,12 @@ class _ReadScreenState extends State<ReadScreen> {
               fontSize: 30,
             ),
           ),
-          /*
           Text(
             '${memo.info}',
             style: TextStyle(
               fontSize: 30,
             ),
           ),
-          */
-          borderedText('${memo.info}'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -114,23 +111,6 @@ class _ReadScreenState extends State<ReadScreen> {
             ],
           )
         ],
-      ),
-    );
-  }
-
-  Widget borderedText(String text, {double fontSize = 30}) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Text(
-          text,
-          style: TextStyle(fontSize: fontSize),
-        ),
       ),
     );
   }
