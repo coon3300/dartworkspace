@@ -50,12 +50,16 @@ class MemoDBHelper {
     List<Map<String, dynamic>> result = await db.query('memos', orderBy: 'no');
     // SELECT * FROM memos ORDER BY no
 
-    // generate : for문과 같은 기능함.
+    // generate : for문과 같은 반복 기능함.
     return List.generate(
       result.length,
       (index) {
         Map<String, dynamic> memo = result[index];
-        return Memo.from(memo);
+        // return Memo.from({
+        //   'no': memo['no'],
+        //   'info': memo['info'],
+        // });
+        return Memo.from(memo); // 위와 같은 기능.
       },
     ); // List<Memo>
   }

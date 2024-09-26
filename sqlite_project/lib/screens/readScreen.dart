@@ -73,6 +73,16 @@ class _ReadScreenState extends State<ReadScreen> {
               fontSize: 30,
             ),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/memo/update',
+                arguments: memo.no,
+              );
+            },
+            child: Text('수정'),
+          )
         ],
       ),
     );
