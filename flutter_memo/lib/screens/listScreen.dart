@@ -36,31 +36,39 @@ class _ListScreenState extends State<ListScreen> {
         itemCount: _memoList.length,
         itemBuilder: (context, index) {
           Memo memo = _memoList[index];
-          return ListTile(
-            leading: Text('${memo.no}'),
-            title: Text('${memo.info}'),
-            trailing: IconButton(
-              onPressed: () async {
-                // 삭제
-                int result = await widget.dbHelper.deleteMemo(memo.no as int);
-
-                if (result > 0) {
-                  setState(() {
-                    _memoList.removeWhere(
-                      (info) => info.no == memo.no,
-                    );
-                  });
-                }
-              },
-              icon: Icon(Icons.delete),
+          return Container(
+            margin: EdgeInsets.all(8), // 각 항목 사이의 간격
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 1),
+              borderRadius: BorderRadius.circular(8),
             ),
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/memo/read',
-                arguments: memo.no,
-              );
-            },
+
+            child: ListTile(
+              leading: Text('${memo.no}'),
+              title: Text('${memo.info.padRight(20).substring(0, 20)}'),
+              trailing: IconButton(
+                onPressed: () async {
+                  // 삭제
+                  int result = await widget.dbHelper.deleteMemo(memo.no as int);
+
+                  if (result > 0) {
+                    setState(() {
+                      _memoList.removeWhere(
+                        (info) => info.no == memo.no,
+                      );
+                    });
+                  }
+                },
+                icon: Icon(Icons.delete),
+              ),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/memo/read',
+                  arguments: memo.no,
+                );
+              },
+            ),
           );
         },
       ),
@@ -73,6 +81,14 @@ class _ListScreenState extends State<ListScreen> {
               Navigator.pushNamed(context, '/memo/bookmark');
             },
             child: Icon(Icons.bookmark),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              // 등록페이지로 전환
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/memo/list', (route) => false);
+            },
+            child: Icon(Icons.home),
           ),
           FloatingActionButton(
             onPressed: () {

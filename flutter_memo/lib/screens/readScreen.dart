@@ -1,13 +1,13 @@
 // readScreen.dart
 import 'package:flutter/material.dart';
 import '../mappers/MemoDBHelper.dart';
-import '../mappers/BookmarkDBHelper.dart';
+// import '../mappers/BookmarkDBHelper.dart';
 import '../models/memo.dart';
 import '../models/bookmark.dart';
 
 class ReadScreen extends StatefulWidget {
   final MemoDBHelper dbHelper = MemoDBHelper();
-  final BookmarkDBHelper dbBookmarkHelper = BookmarkDBHelper();
+  // final BookmarkDBHelper dbBookmarkHelper = BookmarkDBHelper();
 
   @override
   State<ReadScreen> createState() => _ReadScreenState();
@@ -70,61 +70,67 @@ class _ReadScreenState extends State<ReadScreen> {
               fontSize: 30,
             ),
           ),
+          /*
           Text(
             '${memo.info}',
             style: TextStyle(
               fontSize: 30,
             ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/memo/update',
-                arguments: memo.no,
-              );
-            },
-            child: Text('수정'),
-          ),
-          TextButton(
-            //       onPressed: () async {
-            //         // ! 주의
-            //           // 모든 항목에 정상적인 값 입력된 경우
-            //           // String info = _memoEditingController.text;
-            //           Bookmark bookmark = Bookmark(mno: memo.no as int);
-            //           // widget.dbHelper.insertMemo(memo);
-            //           int result = await widget.dbBookmarkHelper.insertBookmark(bookmark);
+          */
+          borderedText('${memo.info}'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/memo/update',
+                    arguments: memo.no,
+                  );
+                },
+                child: Text('수정'),
+              ),
+              IconButton(
+                onPressed: () async {
+                  // ! 주의
+                  // 모든 항목에 정상적인 값 입력된 경우
+                  Bookmark bookmark = Bookmark(mno: memo.no as int);
+                  // widget.dbHelper.insertMemo(memo);
+                  int result = await widget.dbHelper.insertBookmark(bookmark);
 
-            //           if (result > 0) {
-            //             Navigator.pushNamedAndRemoveUntil(
-            //               context,
-            //               "/memo/bookmark",
-            //               (route) => false,
-            //             );
-            //             // push되는 라우터 아래의 경로를 모두 제거 => 사실상 재호출
-            //           }
-            //       }
-            // },
-            onPressed: () async {
-              // ! 주의
-              // 모든 항목에 정상적인 값 입력된 경우
-              Bookmark bookmark = Bookmark(mno: memo.no as int);
-              // widget.dbHelper.insertMemo(memo);
-              int result =
-                  await widget.dbBookmarkHelper.insertBookmark(bookmark);
-
-              if (result > 0) {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  "/memo/bookmark",
-                  (route) => false,
-                );
-                // push되는 라우터 아래의 경로를 모두 제거 => 사실상 재호출
-              }
-            },
-            child: Text('즐겨찾기 추가'),
-          ),
+                  if (result > 0) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      "/memo/bookmark",
+                      (route) => false,
+                    );
+                    // push되는 라우터 아래의 경로를 모두 제거 => 사실상 재호출
+                  }
+                },
+                icon: Icon(Icons.bookmark_add_outlined),
+              )
+            ],
+          )
         ],
+      ),
+    );
+  }
+
+  Widget borderedText(String text, {double fontSize = 30}) {
+    return Container(
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: fontSize),
+        ),
       ),
     );
   }

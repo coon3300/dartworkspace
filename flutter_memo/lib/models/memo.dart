@@ -1,16 +1,16 @@
 class Memo {
   int? no; // PRIMARY KEY
   late String info; // 데이터
-  // late String bookmark;
+  // late int bookmark;
 
   Memo({this.no, required this.info});
   // Memo({this.no, required this.info, required this.bookmark});
 
   // Select한 결과 : Map
   Memo.from(Map<String, dynamic> map) {
-    this.no = map['no'] as int;
-    this.info = map['info'] as String;
-    // this.bookmark = map['bookmark'] as String;
+    no = map['no'] as int;
+    info = map['info'] as String? ?? ''; // null이면 빈 문자열로 대체
+    // bookmark = map['bookmark'] as int? ?? 0; // null이면 0으로 대체
   }
 
   // QeuryBinder 기반으로 정보를 넘길 경우 대비

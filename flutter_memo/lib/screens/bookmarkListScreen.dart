@@ -2,13 +2,11 @@
 
 import 'package:flutter/material.dart';
 import '../mappers/MemoDBHelper.dart';
-import '../mappers/BookmarkDBHelper.dart';
 import '../models/memo.dart';
-import '../models/bookmark.dart';
+// import '../models/bookmark.dart';
 
 class BookmarkListScreen extends StatefulWidget {
   final MemoDBHelper dbHelper = MemoDBHelper();
-  final BookmarkDBHelper dbBookmarkHelper = BookmarkDBHelper();
   @override
   State<StatefulWidget> createState() => _BookmarkListScreenState();
 }
@@ -21,7 +19,7 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
     // 초기화
     super.initState();
 
-    widget.dbBookmarkHelper.getBookmarks().then((result) {
+    widget.dbHelper.getBookmarks().then((result) {
       setState(() {
         _memoList = result;
       });
@@ -41,7 +39,7 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
           Memo memo = _memoList[index];
           return ListTile(
             leading: Text('${memo.no}'),
-            title: Text('${memo.info}'),
+            title: Text('${memo.info.padRight(20).substring(0, 20)}'),
             trailing: IconButton(
               onPressed: () async {
                 // 삭제
@@ -73,16 +71,10 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
           FloatingActionButton(
             onPressed: () {
               // 등록페이지로 전환
-              Navigator.pushNamed(context, '/memo/bookmark');
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/memo/list', (route) => false);
             },
-            child: Icon(Icons.bookmark),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              // 등록페이지로 전환
-              Navigator.pushNamed(context, '/memo/insert');
-            },
-            child: Icon(Icons.create),
+            child: Icon(Icons.home),
           ),
         ],
       ),

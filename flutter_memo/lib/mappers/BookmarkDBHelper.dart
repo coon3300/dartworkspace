@@ -39,7 +39,8 @@ class BookmarkDBHelper {
       await db.execute('''
         CREATE TABLE bookmarks(
           no INTEGER PRIMARY KEY AUTOINCREMENT,
-          mno INTEGER
+          mno INTEGER,
+          FOREIGN KEY (mno) REFERENCES memos(no)
         )
         ''');
     });
@@ -48,10 +49,9 @@ class BookmarkDBHelper {
   // 전체 조회
   Future<List<Memo>> getBookmarks() async {
     Database db = await database; //   Database? _database; 이 (?)부분과 뭔가 관련 있음.
-    List<Map<String, dynamic>> result =
-        // await db.query('bookmarks', orderBy: 'no');
-        await db.rawQuery(
-            'SELECT * FROM memos WHERE no In (SELECT mno FROM bookmarks)');
+    List<Map<String, dynamic>> result = await db.query('memos', orderBy: 'no');
+    // await db.rawQuery(
+    //     'SELECT * FROM memos WHERE no In (SELECT mno FROM bookmarks)');
 
     // SELECT * FROM memos WHERE no in (SELECT mno FROM bookmark)
 

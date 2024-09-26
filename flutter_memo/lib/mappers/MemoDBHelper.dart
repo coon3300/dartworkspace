@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import '../models/memo.dart';
+import '../models/bookmark.dart';
 
 // Mapper
 class MemoDBHelper {
@@ -34,14 +35,44 @@ class MemoDBHelper {
     // join 함수
     String path = join(await getDatabasesPath(), 'memo.db');
 
-    return await openDatabase(path, version: 1, onCreate: (db, version) async {
-      await db.execute('''
+    return await openDatabase(path, version: 2, onCreate: (db, version) async {
+      await db.execute("""
+        CREATE TABLE bookmarks(
+          no INTEGER PRIMARY KEY AUTOINCREMENT,
+          mno INTEGER
+        )
+        """);
+      await db.execute("""
         CREATE TABLE memos(
           no INTEGER PRIMARY KEY AUTOINCREMENT,
-          info TEXT
+          info TEXT,
+          bookmark TEXT
         )
-        ''');
+        """);
     });
+  }
+
+  // 북마크 전체 조회
+  Future<List<Memo>> getBookmarks() async {
+    Database db = await database; //   Database? _database; 이 (?)부분과 뭔가 관련 있음.
+    List<Map<String, dynamic>> result = await db.rawQuery(
+        'SELECT * FROM memos WHERE no In (SELECT mno FROM bookmarks)');
+    // SELECT * FROM memos ORDER BY no
+    return List.generate(
+      result.length,
+      (index) {
+        Map<String, dynamic> memo = result[index];
+        return Memo.from(memo); // 위와 같은 기능.
+      },
+    ); // List<Memo>
+  }
+
+  // 북마크 등록
+  Future<int> insertBookmark(Bookmark bookmark) async {
+    Database db = await database;
+    return await db.insert('bookmarks', bookmark.toMap());
+    // db.insert('bookmarks',{'no' : bookmark.no, 'mno' : bookmark.mno})
+    // bookmark.toMap() => {'no' : bookmark.no, 'mno' : bookmark.mno}
   }
 
   // 전체 조회
@@ -65,7 +96,6 @@ class MemoDBHelper {
   }
 
   // 단건 조회
-  // 전체 : Future<List<Memo>> -> 단건 : Future<Memo>
   Future<Memo> getMemoInfo(int no) async {
     Database db = await database;
     List<Map<String, dynamic>> result =
