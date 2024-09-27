@@ -53,7 +53,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                 controller: _memoEditingController,
                 decoration: InputDecoration(
                   labelText: '정보',
-                  helperText: '기록하고자 하는 정보',
+                  helperText: 'memo',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
@@ -68,7 +68,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextButton(
+                ElevatedButton(
                   // async 추가함.
                   onPressed: () async {
                     // ! 주의
@@ -93,7 +93,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                   },
                   child: Text('수정'),
                 ),
-                TextButton(
+                ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },

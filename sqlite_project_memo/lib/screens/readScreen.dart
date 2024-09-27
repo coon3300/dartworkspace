@@ -53,6 +53,20 @@ class _ReadScreenState extends State<ReadScreen> {
           }
         },
       ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              // 등록페이지로 전환
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/memo/list', (route) => false);
+            },
+            child: Icon(Icons.home),
+            heroTag: null,
+          ),
+        ],
+      ),
     );
   }
 
@@ -77,7 +91,7 @@ class _ReadScreenState extends State<ReadScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(
                     context,

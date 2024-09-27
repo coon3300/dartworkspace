@@ -83,15 +83,15 @@ class _ListScreenState extends State<ListScreen> {
             child: Icon(Icons.bookmark),
             heroTag: null,
           ),
-          FloatingActionButton(
-            onPressed: () {
-              // 등록페이지로 전환
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/memo/list', (route) => false);
-            },
-            child: Icon(Icons.home),
-            heroTag: null,
-          ),
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     // 등록페이지로 전환
+          //     Navigator.pushNamedAndRemoveUntil(
+          //         context, '/memo/list', (route) => false);
+          //   },
+          //   child: Icon(Icons.home),
+          //   heroTag: null,
+          // ),
           FloatingActionButton(
             onPressed: () {
               // 등록페이지로 전환

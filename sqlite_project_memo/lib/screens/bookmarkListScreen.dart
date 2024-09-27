@@ -73,14 +73,6 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
           FloatingActionButton(
             onPressed: () {
               // 등록페이지로 전환
-              Navigator.pushNamed(context, '/memo/bookmark');
-            },
-            child: Icon(Icons.bookmark),
-            heroTag: null,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              // 등록페이지로 전환
               Navigator.pushNamedAndRemoveUntil(
                   context, '/memo/list', (route) => false);
             },

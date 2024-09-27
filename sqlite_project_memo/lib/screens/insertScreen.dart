@@ -50,7 +50,7 @@ class _InsertScreenState extends State<InsertScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextButton(
+                ElevatedButton(
                   // async 추가함.
                   onPressed: () async {
                     // ! 주의
@@ -73,7 +73,7 @@ class _InsertScreenState extends State<InsertScreen> {
                   },
                   child: Text('등록'),
                 ),
-                TextButton(
+                ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -83,7 +83,21 @@ class _InsertScreenState extends State<InsertScreen> {
             )
           ],
         ),
-      ), //
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              // 등록페이지로 전환
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/memo/list', (route) => false);
+            },
+            child: Icon(Icons.home),
+            heroTag: null,
+          ),
+        ],
+      ),
     );
   }
 }
