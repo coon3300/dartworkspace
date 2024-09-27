@@ -34,8 +34,8 @@ class _InsertScreenState extends State<InsertScreen> {
                 maxLines: 5,
                 controller: _memoEditingController,
                 decoration: InputDecoration(
-                  labelText: '정보',
-                  helperText: '기록하고자 하는 정보',
+                  labelText: '메모',
+                  helperText: 'memo',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
