@@ -34,8 +34,8 @@ class _InsertScreenState extends State<InsertScreen> {
                 maxLines: 5,
                 controller: _memoEditingController,
                 decoration: InputDecoration(
-                  labelText: '메모',
-                  helperText: 'memo',
+                  labelText: '정보',
+                  helperText: '기록하고자 하는 정보',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
@@ -83,21 +83,7 @@ class _InsertScreenState extends State<InsertScreen> {
             )
           ],
         ),
-      ),
-      /*
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              // 등록페이지로 전환
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/memo/list', (route) => false);
-            },
-            child: Icon(Icons.home),
-          ),
-        ],
-      ),*/
+      ), //
     );
   }
 }

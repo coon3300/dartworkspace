@@ -67,10 +67,17 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
           );
         },
       ),
-      /*
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          FloatingActionButton(
+            onPressed: () {
+              // 등록페이지로 전환
+              Navigator.pushNamed(context, '/memo/bookmark');
+            },
+            child: Icon(Icons.bookmark),
+            heroTag: null,
+          ),
           FloatingActionButton(
             onPressed: () {
               // 등록페이지로 전환
@@ -78,10 +85,10 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
                   context, '/memo/list', (route) => false);
             },
             child: Icon(Icons.home),
+            heroTag: null,
           ),
         ],
       ),
-      */
     );
   }
 }

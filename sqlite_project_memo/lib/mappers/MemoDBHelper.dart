@@ -2,8 +2,8 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-import '../models/memo.dart';
 import '../models/bookmark.dart';
+import '../models/memo.dart';
 
 // Mapper
 class MemoDBHelper {
@@ -42,12 +42,13 @@ class MemoDBHelper {
           mno INTEGER
         )
         """);
-      await db.execute("""
+
+      await db.execute('''
         CREATE TABLE memos(
           no INTEGER PRIMARY KEY AUTOINCREMENT,
           info TEXT
         )
-        """);
+        ''');
     });
   }
 
@@ -64,14 +65,6 @@ class MemoDBHelper {
         return Memo.from(memo); // 위와 같은 기능.
       },
     ); // List<Memo>
-  }
-
-  // 북마크 등록
-  Future<int> insertBookmark(Bookmark bookmark) async {
-    Database db = await database;
-    return await db.insert('bookmarks', bookmark.toMap());
-    // db.insert('bookmarks',{'no' : bookmark.no, 'mno' : bookmark.mno})
-    // bookmark.toMap() => {'no' : bookmark.no, 'mno' : bookmark.mno}
   }
 
   // 전체 조회
@@ -95,6 +88,7 @@ class MemoDBHelper {
   }
 
   // 단건 조회
+  // 전체 : Future<List<Memo>> -> 단건 : Future<Memo>
   Future<Memo> getMemoInfo(int no) async {
     Database db = await database;
     List<Map<String, dynamic>> result =
@@ -110,6 +104,14 @@ class MemoDBHelper {
     return await db.insert('memos', memo.toMap());
     // db.insert('memos',{'no' : memo.no, 'info' : memo.info})
     // memo.toMap() => {'no' : memo.no, 'info' : memo.info}
+  }
+
+  // 북마크 등록
+  Future<int> insertBookmark(Bookmark bookmark) async {
+    Database db = await database;
+    return await db.insert('bookmarks', bookmark.toMap());
+    // db.insert('bookmarks',{'no' : bookmark.no, 'mno' : bookmark.mno})
+    // bookmark.toMap() => {'no' : bookmark.no, 'mno' : bookmark.mno}
   }
 
   // 수정
