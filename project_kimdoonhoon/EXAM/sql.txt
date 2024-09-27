@@ -1,0 +1,10 @@
+        CREATE TABLE bookmarks(
+          no INTEGER PRIMARY KEY AUTOINCREMENT,
+          mno INTEGER
+        )
+
+        CREATE TABLE memos(
+          no INTEGER PRIMARY KEY AUTOINCREMENT,
+          info TEXT,
+          level INTEGER
+        )
